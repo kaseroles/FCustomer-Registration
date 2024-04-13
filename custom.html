@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   
+    <link rel="stylesheet" href="regis.css">
+    
+     
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Responsive Registration Form</title> 
+</head>
+
+<body>
+    <section>
+    <div class="container">
+        <header>Customer Registration</header>
+
+        <form name="submit-to-google-sheet" action="registration.php" method="POST">
+              <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <input type="text" name="Name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Date of Birth</label>
+                            <input type="date" name="Date Of Birth" placeholder="Enter birth date" required>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>Place of birth</label>
+                            <input type="text" name="Place of birth" placeholder="Enter birthplace" required>
+                        </div>
+                         
+                        <div class="input-field">
+                            <label>Religion</label>
+                            <input type="text" name="Religion" placeholder="Enter religion" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="email" name="Email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mobile Number</label>
+                            <input type="number" name="Mobile Number" placeholder="Enter mobile number" required>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>Occupation</label>
+                            <input type="text" name="Occupation" placeholder="Enter your occupation" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Gender</label>
+                            <select name="Gender" required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+                      
+                        <div class="input-field">
+                            <label>Civil Status</label>
+                            <select name="CivilStatus" required>
+                                <option disabled selected>Select status</option>
+                                <option>Single</option>
+                                <option>Married</option>
+                                <option>Widowed</option>
+                                <option>Engaged</option>
+                                <option>Divorced</option>
+                                <option>Separated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="nextBtn">
+                    <span class="btnText">Next</span>
+                    <i class="uil uil-navigator"></i>
+                </button>
+                
+              </div>
+              
+             <div class="form second">
+                <div class="details address">
+                    <span class="title">Address Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                        <label>Address</label>
+                            <input type="text" name="Address" placeholder="Enter Address" required>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>Address Type</label>
+                            <input type="text" name="AddressType" placeholder="Permanent or Temporary" required>
+                        </div>
+                        
+
+                        <div class="input-field">
+                            <label>Nationality</label>
+                            <input type="text" name="Nationality" placeholder="Enter nationality" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Country</label>
+                            <input type="text" name="Country" placeholder="Enter your Country" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>City</label>
+                            <input type="text" name="City" placeholder="Enter your City" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Zip Code</label>
+                            <input type="number" name="Zip Code" placeholder="Enter Zip Code" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <div class="backBtn">
+                        <i class="uil uil-navigator"></i>
+                        <span class="btnText">Back</span>
+                    </div>
+                    
+                    <button class="submit" type="submit">
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                  </div>
+                  <span id="msg"></span>
+                   
+    <div class="homepage">
+    <p> <a href="signin.html">Back to log-in</a></p> 
+    </div>
+             </div>
+        </form>
+    </div>
+</section>
+    
+    <script>
+        const form = document.querySelector("form"),
+        nextBtn = form.querySelector(".nextBtn"),
+        backBtn = form.querySelector(".backBtn"),
+        allInput = form.querySelectorAll(".first input");
+
+        nextBtn.addEventListener("click", ()=> {
+            allInput.forEach(input => {
+                if(input.value !== ""){
+                    form.classList.add('secActive');
+                }else{
+                    form.classList.remove('secActive');
+                }
+            })
+        })
+
+        backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+    </script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxoYuuXYceh4GVuffEt0kYg0wwWmSILPP8EmOwzHCL2C0_UWYv74R-hFSYDOgLYApo5/exec'
+        const formSubmit = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = "Message sent successfully"
+                    setTimeout(function () {
+                        msg.innerHTML = " "
+                    }, 5000)
+                    form.reset()
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
+
+

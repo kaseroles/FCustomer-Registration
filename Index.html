@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Landing Page</title>
+    <link rel="stylesheet" href="HomeStyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our Landing Page</h1>
+        <p>Thank you for trying our Registration site.</p>
+        <button type="button" class="back-button">Back</button> <!-- Modified button -->
+    </div>
+
+    <script>
+        document.querySelector('.back-button').addEventListener('click', function() {
+            window.location.href = 'signin.html'; // Redirect to the login page
+        });
+    </script>
+</body>
+</html>
